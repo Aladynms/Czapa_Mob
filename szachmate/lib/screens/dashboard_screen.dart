@@ -22,7 +22,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       _tournaments = json.decode(mockTournaments); // mock JSON
     });
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +49,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Tytuł
                 Text(
                   tournament['title'],
                   style: TextStyle(
@@ -57,34 +58,41 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 6),
-                Text(
-                  "📅 Data: 2025-06-01\n🌐 Lokalizacja: Online",
-                  style: TextStyle(color: Colors.white70, fontSize: 13),
-                ),
-                SizedBox(height: 12),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/tournament',
-                        arguments: tournament,
-                      );
-                    },
-                    child: Text("Zobacz"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF9EEB47),
-                      foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                      textStyle: TextStyle(fontWeight: FontWeight.bold),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                SizedBox(height: 8),
+                // Opis i przycisk w jednej linii
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Opis turnieju
+                    Expanded(
+                      child: Text(
+                        "📅 Data: 2025-06-01\n🌐 Lokalizacja: Online",
+                        style: TextStyle(color: Colors.white70, fontSize: 13),
                       ),
                     ),
-                  ),
-                )
+                    // Przycisk
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/tournament',
+                          arguments: tournament,
+                        );
+                      },
+                      child: Text("Zobacz"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF9EEB47),
+                        foregroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        textStyle: TextStyle(fontWeight: FontWeight.bold),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           );
