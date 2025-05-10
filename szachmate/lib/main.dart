@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      initialRoute: '/', // Główna trasa
+      initialRoute: '/', // Start od głównego ekranu nawigacji
       routes: {
-        '/': (context) => MainNavigationScreen(), // Ekran główny z nawigacją
+        '/': (context) => MainNavigationScreen(),
         '/dashboard': (context) => DashboardScreen(),
         '/my-tournaments': (context) => MyTournamentsScreen(),
         '/profile': (context) => ProfileScreen(),

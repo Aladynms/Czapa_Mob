@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../data/mock_data.dart'; // Import danych
+import '../data/mock_data.dart'; // lokalny JSON string
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -17,35 +17,75 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> fetchTournaments() async {
-    await Future.delayed(Duration(seconds: 1)); // Symulacja opóźnienia
+    await Future.delayed(Duration(seconds: 1)); // symulacja API
     setState(() {
-      _tournaments = json.decode(mockTournaments); // Użycie danych z pliku
+      _tournaments = json.decode(mockTournaments); // mock JSON
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("SzachMate – Turnieje")),
+      backgroundColor: Color(0xFF302E2B),
       body: ListView.builder(
+        padding: EdgeInsets.all(12),
         itemCount: _tournaments.length,
         itemBuilder: (context, index) {
           final tournament = _tournaments[index];
-          return Card(
-            margin: EdgeInsets.all(8),
-            child: ListTile(
-              title: Text(tournament['title']),
-              subtitle: Text("Data: 2025-06-01\nLokalizacja: Online"),
-              trailing: ElevatedButton(
-                child: Text("Zobacz"),
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/tournament',
-                    arguments: tournament, // Przekazanie danych turnieju
-                  );
-                },
-              ),
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Color(0xFF262522),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 6,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  tournament['title'],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  "📅 Data: 2025-06-01\n🌐 Lokalizacja: Online",
+                  style: TextStyle(color: Colors.white70, fontSize: 13),
+                ),
+                SizedBox(height: 12),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/tournament',
+                        arguments: tournament,
+                      );
+                    },
+                    child: Text("Zobacz"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF9EEB47),
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      textStyle: TextStyle(fontWeight: FontWeight.bold),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
           );
         },

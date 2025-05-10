@@ -18,26 +18,51 @@ class MyTournamentsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Moje turnieje")),
+      backgroundColor: Color(0xFF302E2B),
       body: ListView.builder(
+        padding: EdgeInsets.all(12),
         itemCount: mockJoinedTournaments.length,
         itemBuilder: (context, index) {
           final tournament = mockJoinedTournaments[index];
-          return Card(
-            margin: EdgeInsets.all(8),
-            child: ListTile(
-              title: Text(tournament['title']),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(tournament['body']),
-                  SizedBox(height: 4),
-                  Text(
-                    "Status: ${tournament['status']}",
-                    style: TextStyle(color: getStatusColor(tournament['status'])),
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Color(0xFF262522),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 6,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  tournament['title'],
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
-                ],
-              ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  tournament['body'],
+                  style: TextStyle(color: Colors.white70),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Status: ${tournament['status']}",
+                  style: TextStyle(
+                    color: getStatusColor(tournament['status']),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
             ),
           );
         },

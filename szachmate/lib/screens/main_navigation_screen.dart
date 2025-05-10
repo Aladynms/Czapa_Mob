@@ -21,18 +21,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     InfoScreen(),
   ];
 
-  final List<String> _titles = [
-    "Turnieje",
-    "Moje turnieje",
-    "Profil",
-    "Ranking",
-    "Informacje",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_titles[_currentIndex])),
+appBar: AppBar(
+  backgroundColor: Color(0xFF262522),
+  centerTitle: true,
+  automaticallyImplyLeading: false,
+  title: Image.asset(
+    'assets/szachlogo.png',
+    height: 128,
+  ),
+),
+
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -42,7 +43,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           });
         },
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blueGrey,
+        backgroundColor: Color(0xFF262522),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white60,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.event), label: "Turnieje"),
           BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Moje"),
