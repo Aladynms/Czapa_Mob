@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import '../data/mock_data.dart'; // lokalny JSON string
+import '../data/mock_data.dart';
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -56,7 +56,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Tytuł
                 Text(
                   tournament['title'],
                   style: TextStyle(
@@ -66,19 +65,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ),
                 SizedBox(height: 8),
-                // Opis i przycisk w jednej linii
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Opis turnieju
                     Expanded(
                       child: Text(
                         "📅 Data: ${tournament['date']}\n🌐 Lokalizacja: ${tournament['location']}",
                         style: TextStyle(color: Colors.white70, fontSize: 13),
                       ),
                     ),
-                    // Przycisk
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(

@@ -12,7 +12,7 @@ class InfoScreen extends StatelessWidget {
           BoxShadow(
             color: Colors.black45.withOpacity(0.2),
             blurRadius: 6,
-            offset: Offset(0, 4), // cień tylko od dołu
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -72,7 +72,6 @@ class InfoScreen extends StatelessWidget {
               content: [
                 InkWell(
                   onTap: () {
-                    // TODO: otwórz link do zasad FIDE
                   },
                   child: Text(
                     "→ Oficjalne zasady FIDE (pdf)",

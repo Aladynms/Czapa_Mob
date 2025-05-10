@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/tournament_provider.dart';
-import '../data/mock_data.dart'; // żeby mieć dostęp do mockTournaments
+import '../data/mock_data.dart';
 import 'dart:convert';
 
 class MyTournamentsScreen extends StatelessWidget {
@@ -75,57 +75,59 @@ class MyTournamentsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Row(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Lewa strona – dane turnieju
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              tournament['title'],
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "📅 Data: ${tournament['date']}\n🌐 Lokalizacja: ${tournament['location']}",
-                              style: TextStyle(color: Colors.white70),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "Status: ${tournament['status']}",
-                              style: TextStyle(
-                                color: getStatusColor(tournament['status']),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ],
+                      Text(
+                        tournament['title'],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
-                      
-                      if (tournament['status'] == 'oczekujący')
-                        ElevatedButton(
-                          onPressed: () {
-                            Provider.of<TournamentProvider>(context, listen: false)
-                                .leaveTournament(tournament['id']);
-                          },
-                          child: Text("Zrezygnuj"),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.redAccent,
-                            foregroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                            textStyle: TextStyle(fontWeight: FontWeight.bold),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                      SizedBox(height: 8),
+
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "📅 Data: ${tournament['date']}\n🌐 Lokalizacja: ${tournament['location']}",
+                              style: TextStyle(color: Colors.white70, fontSize: 13),
                             ),
                           ),
+
+                          if (tournament['status'] == 'oczekujący')
+                            ElevatedButton(
+                              onPressed: () {
+                                Provider.of<TournamentProvider>(context, listen: false)
+                                    .leaveTournament(tournament['id']);
+                              },
+                              child: Text("Zrezygnuj"),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent,
+                                foregroundColor: Colors.white,
+                                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                textStyle: TextStyle(fontWeight: FontWeight.bold),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+
+                      SizedBox(height: 8),
+
+                      Text(
+                        "Status: ${tournament['status']}",
+                        style: TextStyle(
+                          color: getStatusColor(tournament['status']),
+                          fontWeight: FontWeight.w500,
                         ),
+                      ),
                     ],
                   ),
                 );

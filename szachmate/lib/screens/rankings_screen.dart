@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/mock_data.dart'; // Import danych
+import '../data/mock_data.dart'; 
 
 class RankingsScreen extends StatefulWidget {
   const RankingsScreen({super.key});

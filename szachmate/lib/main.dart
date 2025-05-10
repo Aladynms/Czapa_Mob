@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      initialRoute: '/', // Start od głównego ekranu nawigacji
+      initialRoute: '/', 
       routes: {
         '/': (context) => MainNavigationScreen(),
         '/dashboard': (context) => DashboardScreen(),
