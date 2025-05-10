@@ -7,8 +7,16 @@ import 'screens/rankings_screen.dart';
 import 'screens/info_screen.dart';
 import 'screens/tournament_detail_screen.dart';
 
+import 'package:provider/provider.dart';
+import 'providers/tournament_provider.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => TournamentProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

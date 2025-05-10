@@ -17,9 +17,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> fetchTournaments() async {
-    await Future.delayed(Duration(seconds: 1)); // symulacja API
+    final decoded = json.decode(mockTournaments) as List;
+    final now = DateTime.now();
+
+    final filtered = decoded.where((t) {
+      final parsedDate = DateTime.tryParse(t['date'] ?? '');
+      return parsedDate != null && parsedDate.isAfter(now);
+    }).toList();
+
     setState(() {
-      _tournaments = json.decode(mockTournaments); // mock JSON
+      _tournaments = filtered;
     });
   }
   
@@ -67,7 +74,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     // Opis turnieju
                     Expanded(
                       child: Text(
-                        "📅 Data: 2025-06-01\n🌐 Lokalizacja: Online",
+                        "📅 Data: ${tournament['date']}\n🌐 Lokalizacja: ${tournament['location']}",
                         style: TextStyle(color: Colors.white70, fontSize: 13),
                       ),
                     ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+import '../providers/tournament_provider.dart';
+
 class TournamentDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -55,6 +58,8 @@ class TournamentDetailScreen extends StatelessWidget {
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
+                      final provider = Provider.of<TournamentProvider>(context, listen: false);
+                      provider.joinTournament(tournament);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Dołączono do turnieju!')),
                       );
