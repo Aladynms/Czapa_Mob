@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import '../data/mock_data.dart'; // Import danych
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -17,14 +17,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> fetchTournaments() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-    if (response.statusCode == 200) {
-      setState(() {
-        _tournaments = json.decode(response.body).take(10).toList();
-      });
-    } else {
-      throw Exception('Failed to load tournaments');
-    }
+    await Future.delayed(Duration(seconds: 1)); // Symulacja opóźnienia
+    setState(() {
+      _tournaments = json.decode(mockTournaments); // Użycie danych z pliku
+    });
   }
 
   @override
@@ -43,7 +39,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
               trailing: ElevatedButton(
                 child: Text("Zobacz"),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/tournament', arguments: tournament);
+                  Navigator.pushNamed(
+                    context,
+                    '/tournament',
+                    arguments: tournament, // Przekazanie danych turnieju
+                  );
                 },
               ),
             ),

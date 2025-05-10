@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../data/mock_data.dart'; // Import danych
 
 class RankingsScreen extends StatefulWidget {
   @override
@@ -8,16 +9,9 @@ class RankingsScreen extends StatefulWidget {
 class _RankingsScreenState extends State<RankingsScreen> {
   String selectedFilter = 'wszyscy';
 
-  List<Map<String, dynamic>> allPlayers = [
-    {'name': 'Anna Nowak', 'rating': 1890, 'tournaments': 12},
-    {'name': 'Piotr Zieliński', 'rating': 1740, 'tournaments': 8},
-    {'name': 'Kamil Wiśniewski', 'rating': 1630, 'tournaments': 15},
-    {'name': 'Ewa Kaczmarek', 'rating': 1920, 'tournaments': 20},
-  ];
-
   @override
   Widget build(BuildContext context) {
-    List sortedPlayers = [...allPlayers];
+    List sortedPlayers = [...mockPlayers];
     sortedPlayers.sort((a, b) => b['rating'].compareTo(a['rating']));
 
     return Scaffold(

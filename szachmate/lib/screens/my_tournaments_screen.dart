@@ -1,27 +1,7 @@
 import 'package:flutter/material.dart';
+import '../data/mock_data.dart'; // Import danych
 
 class MyTournamentsScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> joinedTournaments = [
-    {
-      'id': 1,
-      'title': 'Szachowy Puchar Krakowa',
-      'status': 'zatwierdzony',
-      'body': 'Turniej klasyczny w centrum Krakowa',
-    },
-    {
-      'id': 2,
-      'title': 'Online Blitz Cup',
-      'status': 'oczekujący',
-      'body': 'Błyskawiczny turniej online',
-    },
-    {
-      'id': 3,
-      'title': 'Szachowe starcie juniorów',
-      'status': 'odrzucony',
-      'body': 'Turniej lokalny dla młodzieży',
-    },
-  ];
-
   Color getStatusColor(String status) {
     switch (status) {
       case 'zatwierdzony':
@@ -40,9 +20,9 @@ class MyTournamentsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Moje turnieje")),
       body: ListView.builder(
-        itemCount: joinedTournaments.length,
+        itemCount: mockJoinedTournaments.length,
         itemBuilder: (context, index) {
-          final tournament = joinedTournaments[index];
+          final tournament = mockJoinedTournaments[index];
           return Card(
             margin: EdgeInsets.all(8),
             child: ListTile(
@@ -57,16 +37,6 @@ class MyTournamentsScreen extends StatelessWidget {
                     style: TextStyle(color: getStatusColor(tournament['status'])),
                   ),
                 ],
-              ),
-              trailing: ElevatedButton(
-                child: Text("Szczegóły"),
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    '/tournament',
-                    arguments: tournament,
-                  );
-                },
               ),
             ),
           );

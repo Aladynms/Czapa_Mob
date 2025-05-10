@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'screens/tournament_detail_screen.dart';
 import 'screens/main_navigation_screen.dart';
+import 'screens/dashboard_screen.dart';
+import 'screens/my_tournaments_screen.dart';
+import 'screens/profile_screen.dart';
+import 'screens/rankings_screen.dart';
+import 'screens/info_screen.dart';
+import 'screens/tournament_detail_screen.dart';
 
 void main() {
-  runApp(SzachMateApp());
+  runApp(MyApp());
 }
 
-class SzachMateApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,9 +21,14 @@ class SzachMateApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      initialRoute: '/', // Główna trasa
       routes: {
-        '/': (context) => MainNavigationScreen(),
+        '/': (context) => MainNavigationScreen(), // Ekran główny z nawigacją
+        '/dashboard': (context) => DashboardScreen(),
+        '/my-tournaments': (context) => MyTournamentsScreen(),
+        '/profile': (context) => ProfileScreen(),
+        '/rankings': (context) => RankingsScreen(),
+        '/info': (context) => InfoScreen(),
         '/tournament': (context) => TournamentDetailScreen(),
       },
     );
